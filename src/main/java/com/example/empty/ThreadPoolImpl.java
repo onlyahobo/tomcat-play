@@ -16,9 +16,9 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 @Configuration
 class ThreadPoolImpl {
 
-    private final RejectedExecutionHandler handler = (runnable, executor) -> log.warn("My executor task {}", runnable);
+    private final RejectedExecutionHandler handler = (runnable, executor) -> log.warn("ThreadPoolImpl executor task {}", runnable);
 
-    private final ThreadFactory factory = new ThreadFactoryBuilder().setNameFormat("My_Thread-%d").build();
+    private final ThreadFactory factory = new ThreadFactoryBuilder().setNameFormat("ThreadPoolImpl_Thread-%d").build();
 
     @Bean("myExecutor")
     Executor executor(MeterRegistry registry) {
@@ -31,7 +31,7 @@ class ThreadPoolImpl {
             handler
         );
 
-        return ExecutorServiceMetrics.monitor(registry, executor, "MyExecutor");
+        return ExecutorServiceMetrics.monitor(registry, executor, "ThreadPoolImpl");
     }
 
 }

@@ -23,7 +23,7 @@ class Controller {
 
     @GetMapping(value = "1", produces = "text/plain")
     CompletableFuture<String> endpoint1() {
-        log.info("Request no {} processing", COUNTER++);
+        log.info("Request no {} processing. Thread: {}({})", COUNTER++, Thread.currentThread().getName(), Thread.currentThread().getId());
         return businessLogicService.doBusinessLogic(COUNTER).thenApply(String::valueOf);
     }
 
